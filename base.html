@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Fundraising Campaign</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="stylesheet" href="base.css" />
+	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+</head>
+<body>
+	<div id="wrapper">
+		<div id="container">
+			<div id="content">
+				<h1>Fundraising Campaign</h1>
+				<div id="target-container">
+					<h2>Target <span id="target">&pound;100</span></h2>
+				</div>	
+				<div id="progress-bar">
+					<div id="progress"><span id="amount"></span></div>
+				</div>
+				<div id="buttons">
+					<div class="button" id="one">
+						<p>&pound;1</p>
+					</div>
+					<div class="button" id="five">
+						<p>&pound;5</p>
+					</div>
+					<div class="button" id="ten">
+						<p>&pound;10</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script   src="https://code.jquery.com/jquery-2.2.4.min.js"   integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="   crossorigin="anonymous"></script>
+	<script>
+		var currentAmount = 0;
+		var total = 100;
+		var complete = false;		
+		
+		/* animations for when reached the target */
+		function onComplete() {
+			$("#target").html("Complete!");
+			complete = true;
+		}
+		
+		/* Add specified amount to the current total and calculate percentage */		
+		function add(amount, total) {
+			if(currentAmount < total) {
+				currentAmount += amount;
+				percentage = (currentAmount / total) * 100;
+				//linear-gradient(0deg, #F9DC5C 30%, white 30%)
+				$("#target-container").css("background", "linear-gradient(0deg, #F9DC5C " + percentage + "%, white " + percentage + "%)"); 
+				$("#amount").html("&pound;" + currentAmount);
+				console.log(currentAmount, total, currentAmount >= total);
+				if(currentAmount >= total){
+					onComplete();
+					return 100;
+				}
+				return percentage;
+			}
+			else {
+				currentAmount += amount;
+				$("#amount").html("&pound;" + currentAmount);
+				return 100;
+			}
+		}
+		
+		/* animate the width of the progress bar */
+		function animateBar(width, time) {
+			$("#progress").animate({
+				width: width + "%"
+			}, time);
+		}
+		
+		
+		$( document ).ready(function() {
+			//initial value and animation
+			width = add(47, total);
+			animateBar(width, 500);
+		
+			$("#one").on("click", function(e) {
+				$("#one").stop(false, true);
+				width = add(1, total);
+				animateBar(width, 100);
+			});
+
+			$("#five").on("click", function(e) {
+				$("#one").stop(false, true);
+				width = add(5, total);
+				animateBar(width, 200);
+			});
+ 			
+			$("#ten").on("click", function(e) {
+				$("#one").stop(false, true);
+				width = add(10, total);
+				animateBar(width, 300);
+			});
+ 
+		})		
+		
+		
+	</script>
+</body>
+</html>
