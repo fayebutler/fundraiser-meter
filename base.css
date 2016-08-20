@@ -33,9 +33,9 @@ body {
 }	
 
 #target-container {
-	position:absolute;
+	/*position:absolute;
 	top:0;
-	right:0;
+	right:0;*/
 	margin:20px;
 	border: 3px solid #F9DC5C;
 }
@@ -49,8 +49,8 @@ body {
 }
 
 #progress-bar {
-	height:20px;
-	width:60%;
+	height:50px;
+	width:100%;
 	border-radius:5px;
 	background-color:rgba(232,72,85, 0.5);
 	margin:0 auto;
@@ -59,16 +59,19 @@ body {
 
 #progress {
 	background-color:#e84855 ;
-	height:20px;
+	height:100%;
 	position:relative;
 	top:0;
 	width:0%;
 	left:0;
 	border-radius:5px;
+	display:table;
 }
 
 #amount {
 	color:#E8E8E8;
+	display:table-cell;
+	vertical-align:middle;
 }
 
 #buttons {
@@ -97,4 +100,20 @@ body {
 
 .button > p {
 	margin: 0;
+}
+
+
+
+@media (min-width:1024px) {
+
+	#target-container {
+		position:absolute;
+		top:0;
+		right:0;
+	}
+	#progress-bar {
+		height:20px;
+		width:60%;
+	}
+
 }
